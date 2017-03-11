@@ -188,7 +188,7 @@ class IScrolledDownAndWhatHappenedNextShockedMe extends Component {
           <Image source={require('./img/favicon.png')} />
           <Image source={require('./img/favicon.png')} />
           <Image source={require('./img/favicon.png')} />
-          <Text style={{fontSize:96}}>What's the best</Text>
+          <Text style={{fontSize:96}}>Whats the best</Text>
           <Image source={require('./img/favicon.png')} />
           <Image source={require('./img/favicon.png')} />
           <Image source={require('./img/favicon.png')} />
@@ -233,3 +233,44 @@ class ListViewBasics extends Component {
     );
   }
 }
+
+//10、Fetch data from remote APIs
+//POST:
+fetch('https://mywebsite.com/endpoint/', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    firstParam: 'yourValue',
+    secondParam: 'yourOtherValue',
+  })
+})
+//GET:
+function getMoviesFromApiAsync() {
+    return fetch('https://facebook.github.io/react-native/movies.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        return responseJson.movies;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }	
+  //XMLHttpRequest API which is built in to react-native:
+var request = new XMLHttpRequest();
+request.onreadystatechange = (e) => {
+  if (request.readyState !== 4) {
+    return;
+  }
+
+  if (request.status === 200) {
+    console.log('success', request.responseText);
+  } else {
+    console.warn('error');
+  }
+};
+
+request.open('GET', 'https://mywebsite.com/endpoint/');
+request.send();
